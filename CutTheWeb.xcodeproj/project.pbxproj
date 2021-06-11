@@ -13,6 +13,8 @@
 		486812442673505800F13870 /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 486812432673505800F13870 /* GameViewController.swift */; };
 		486812472673505800F13870 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 486812452673505800F13870 /* Main.storyboard */; };
 		486812492673505D00F13870 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 486812482673505D00F13870 /* Assets.xcassets */; };
+		48DF20D12673EAA300D6344F /* Configuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48DF20D02673EAA300D6344F /* Configuration.swift */; };
+		48DF20D42673ECB200D6344F /* Web.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48DF20D32673ECB200D6344F /* Web.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +26,8 @@
 		486812462673505800F13870 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		486812482673505D00F13870 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4868124A2673505D00F13870 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		48DF20D02673EAA300D6344F /* Configuration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Configuration.swift; sourceTree = "<group>"; };
+		48DF20D32673ECB200D6344F /* Web.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Web.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -63,6 +67,8 @@
 				486812452673505800F13870 /* Main.storyboard */,
 				486812482673505D00F13870 /* Assets.xcassets */,
 				4868124A2673505D00F13870 /* Info.plist */,
+				48DF20D02673EAA300D6344F /* Configuration.swift */,
+				48DF20D32673ECB200D6344F /* Web.swift */,
 			);
 			path = CutTheWeb;
 			sourceTree = "<group>";
@@ -139,6 +145,8 @@
 			files = (
 				486812422673505800F13870 /* GameScene.swift in Sources */,
 				486812442673505800F13870 /* GameViewController.swift in Sources */,
+				48DF20D12673EAA300D6344F /* Configuration.swift in Sources */,
+				48DF20D42673ECB200D6344F /* Web.swift in Sources */,
 				4868123C2673505800F13870 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
