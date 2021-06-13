@@ -13,3 +13,7 @@ struct ZPositions {
     static let web: CGFloat = 1
     static let spider: CGFloat = 2
 }
+
+struct nodeNames {
+    static let webSegment = "webSegment"
+}

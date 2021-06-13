@@ -11,11 +11,13 @@ import SpriteKit
 class Web: SKSpriteNode {
     
     var segments: [SKSpriteNode] = []
+    var webNumber = 0
     
-    init(at position: CGPoint) {
+    init(at position: CGPoint, withNumber: Int) {
         super.init(texture: SKTexture(imageNamed: "strandHolder"), color: UIColor.clear, size: CGSize(width: 30.0, height: 30.0))
         self.position = position
         self.zPosition = ZPositions.web
+        webNumber = withNumber
         if let holderSize = self.texture?.size() {
             self.physicsBody = SKPhysicsBody(circleOfRadius: holderSize.height/2)
             self.physicsBody?.affectedByGravity = false
@@ -29,7 +31,6 @@ class Web: SKSpriteNode {
     
     func createSegments(toReach spider: SKSpriteNode) {
         let distance = calculateDistance(to: CGPoint(x: spider.frame.midX, y: spider.frame.maxY))
-        print(distance)
         let segmentHeight = 6.0
         let numberOfSegments = Int(Double(distance - self.size.height/2) / segmentHeight)
 
@@ -38,6 +39,7 @@ class Web: SKSpriteNode {
             segment.physicsBody = SKPhysicsBody(rectangleOf: CGSize(width: segmentHeight, height: segmentHeight))
             segment.physicsBody?.density = 10
             segment.zPosition = ZPositions.web
+            segment.name = nodeNames.webSegment + String(webNumber)
             let offset = segment.size.height * CGFloat(i)
             segment.position = CGPoint(x: position.x, y: position.y - offset)
             segments.append(segment)
