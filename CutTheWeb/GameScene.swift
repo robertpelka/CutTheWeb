@@ -8,7 +8,7 @@
 import SpriteKit
 import GameplayKit
 
-class GameScene: SKScene, SKPhysicsContactDelegate {
+class GameScene: SKScene {
     
     var webs = [Web]()
     var spider = SKSpriteNode()
@@ -34,6 +34,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             case "spider":
                 createSpider(from: child)
                 child.removeFromParent()
+            case "tree":
+                createTree(from: child)
+                child.removeFromParent()
             default:
                 continue
             }
@@ -57,10 +60,27 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     func createSpider(from node: SKNode) {
         spider = SKSpriteNode(imageNamed: "spider")
+        spider.name = NodeNames.spider
         spider.physicsBody = SKPhysicsBody(rectangleOf: spider.size)
+        spider.physicsBody?.categoryBitMask = PhysicsCategories.spiderCategory
+        spider.physicsBody?.contactTestBitMask = PhysicsCategories.treeCategory
+        spider.physicsBody?.restitution = 0
         spider.position = node.position
         spider.zPosition = ZPositions.spider
         addChild(spider)
+    }
+    
+    func createTree(from node: SKNode) {
+        let tree = SKSpriteNode(imageNamed: "tree")
+        tree.setScale(1.8)
+        tree.physicsBody = SKPhysicsBody(rectangleOf: CGSize(width: tree.size.width - 120, height: tree.size.height - 120))
+        tree.physicsBody?.categoryBitMask = PhysicsCategories.treeCategory
+        tree.physicsBody?.restitution = 0
+        tree.physicsBody?.friction = 1
+        tree.physicsBody?.isDynamic = false
+        tree.position = node.position
+        tree.zPosition = ZPositions.tree
+        addChild(tree)
     }
     
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -75,8 +95,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     func checkIfWebCut(with body: SKPhysicsBody) {
         guard let segment = body.node else { return }
-        if let segmentNameWithoutNumber = segment.name?.prefix(nodeNames.webSegment.count) {
-            if segmentNameWithoutNumber == nodeNames.webSegment {
+        if let segmentNameWithoutNumber = segment.name?.prefix(NodeNames.webSegment.count) {
+            if segmentNameWithoutNumber == NodeNames.webSegment {
                 cutWeb(at: segment)
             }
         }
@@ -89,6 +109,26 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             let remove = SKAction.removeFromParent()
             let sequence = SKAction.sequence([fadeOut, remove])
             node.run(sequence)
+        }
+    }
+    
+}
+
+//MARK: - SKPhysicsContactDelegate
+
+extension GameScene: SKPhysicsContactDelegate {
+    
+    func didBegin(_ contact: SKPhysicsContact) {
+        let contactMask = contact.bodyA.categoryBitMask | contact.bodyB.categoryBitMask
+        if contactMask == PhysicsCategories.spiderCategory | PhysicsCategories.treeCategory {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
+                if let tree = (contact.bodyA.node?.name != NodeNames.spider) ? contact.bodyA.node as? SKSpriteNode : contact.bodyB.node as? SKSpriteNode {
+                    if self.spider.position.y > tree.position.y {
+                        print("WIN")
+                        self.spider.physicsBody?.isDynamic = false
+                    }
+                }
+            }
         }
     }
     

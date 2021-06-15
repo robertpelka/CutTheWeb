@@ -8,12 +8,20 @@
 import Foundation
 import SpriteKit
 
-struct ZPositions {
+enum ZPositions {
     static let background: CGFloat = 0
     static let web: CGFloat = 1
-    static let spider: CGFloat = 2
+    static let tree: CGFloat = 2
+    static let spider: CGFloat = 3
 }
 
-struct nodeNames {
+enum PhysicsCategories {
+    static let none: UInt32 = 0
+    static let spiderCategory: UInt32 = 0x1
+    static let treeCategory: UInt32 = 0x1 << 1
+}
+
+enum NodeNames {
     static let webSegment = "webSegment"
+    static let spider = "spider"
 }

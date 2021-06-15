@@ -20,6 +20,7 @@ class Web: SKSpriteNode {
         webNumber = withNumber
         if let holderSize = self.texture?.size() {
             self.physicsBody = SKPhysicsBody(circleOfRadius: holderSize.height/2)
+            physicsBody?.collisionBitMask = PhysicsCategories.none
             self.physicsBody?.affectedByGravity = false
             self.physicsBody?.isDynamic = false
         }
@@ -51,8 +52,9 @@ class Web: SKSpriteNode {
                 offset = CGFloat(segmentHeight) * CGFloat(i)
             }
             segment.physicsBody?.mass = 0.1
+            segment.physicsBody?.collisionBitMask = PhysicsCategories.spiderCategory
             segment.zPosition = ZPositions.web
-            segment.name = nodeNames.webSegment + String(webNumber)
+            segment.name = NodeNames.webSegment + String(webNumber)
             segment.position = CGPoint(x: position.x, y: position.y - offset)
             segments.append(segment)
             spider.scene?.addChild(segment)
