@@ -30,17 +30,29 @@ class Web: SKSpriteNode {
     }
     
     func createSegments(toReach spider: SKSpriteNode) {
+        let segmentHeight = 30.0
+        let segmentWidth = 6.0
         let distance = calculateDistance(to: CGPoint(x: spider.frame.midX, y: spider.frame.maxY))
-        let segmentHeight = 6.0
-        let numberOfSegments = Int(Double(distance - self.size.height/2) / segmentHeight)
-
-        for i in 1...numberOfSegments {
-            let segment = SKSpriteNode(color: UIColor.white, size: CGSize(width: segmentHeight, height: segmentHeight))
-            segment.physicsBody = SKPhysicsBody(rectangleOf: CGSize(width: segmentHeight, height: segmentHeight))
-            segment.physicsBody?.density = 10
+        let numberOfSegments = Double(distance - self.size.height/2) / segmentHeight
+        let roundedNumberOfSegments = Int(ceil(numberOfSegments))
+        let allWholeSegmentsLength = Double(roundedNumberOfSegments - 1) * segmentHeight
+        let lastSegmentHeight = Double(distance - self.size.height/2) - allWholeSegmentsLength
+        
+        for i in 1...roundedNumberOfSegments {
+            let segment = SKSpriteNode(color: UIColor.white, size: CGSize(width: segmentWidth, height: segmentHeight))
+            var offset: CGFloat = 0
+            if i == roundedNumberOfSegments {
+                segment.size.height = CGFloat(lastSegmentHeight)
+                segment.physicsBody = SKPhysicsBody(rectangleOf: CGSize(width: segmentWidth, height: lastSegmentHeight))
+                offset = CGFloat(segmentHeight) * CGFloat(i-1) + (CGFloat(segmentHeight/2) + CGFloat(lastSegmentHeight/2))
+            }
+            else {
+                segment.physicsBody = SKPhysicsBody(rectangleOf: CGSize(width: segmentWidth, height: segmentHeight))
+                offset = CGFloat(segmentHeight) * CGFloat(i)
+            }
+            segment.physicsBody?.mass = 0.1
             segment.zPosition = ZPositions.web
             segment.name = nodeNames.webSegment + String(webNumber)
-            let offset = segment.size.height * CGFloat(i)
             segment.position = CGPoint(x: position.x, y: position.y - offset)
             segments.append(segment)
             spider.scene?.addChild(segment)
@@ -53,7 +65,7 @@ class Web: SKSpriteNode {
     
     func connectSegments() {
         guard  let holderBody = self.physicsBody, let firstSegmentBody = segments[0].physicsBody else { return }
-        let joinPoint = CGPoint(x: segments[0].frame.midX, y: segments[0].frame.maxY)
+        let joinPoint = CGPoint(x: self.frame.midX, y: self.frame.midY)
         let joint = SKPhysicsJointPin.joint(withBodyA: holderBody, bodyB: firstSegmentBody, anchor: joinPoint)
         self.scene?.physicsWorld.add(joint)
         
@@ -73,7 +85,7 @@ class Web: SKSpriteNode {
         
         guard  let spiderBody = spider.physicsBody, let lastSegmentBody = segments.last?.physicsBody else { return }
         let joinPoint = CGPoint(x: spider.frame.midX, y: spider.frame.maxY)
-        let joint = SKPhysicsJointPin.joint(withBodyA: spiderBody, bodyB: lastSegmentBody, anchor: joinPoint)
+        let joint = SKPhysicsJointPin.joint(withBodyA: lastSegmentBody, bodyB: spiderBody, anchor: joinPoint)
         self.scene?.physicsWorld.add(joint)
     }
     
