@@ -5,7 +5,6 @@
 //  Created by Robert Pelka on 11/06/2021.
 //
 
-import UIKit
 import SpriteKit
 
 class Web: SKSpriteNode {
@@ -18,16 +17,20 @@ class Web: SKSpriteNode {
         self.position = position
         self.zPosition = ZPositions.web
         webNumber = withNumber
+        createPhysicsBody()
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    func createPhysicsBody() {
         if let holderSize = self.texture?.size() {
             self.physicsBody = SKPhysicsBody(circleOfRadius: holderSize.height/2)
             physicsBody?.collisionBitMask = PhysicsCategories.none
             self.physicsBody?.affectedByGravity = false
             self.physicsBody?.isDynamic = false
         }
-    }
-    
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
     }
     
     func createSegments(toReach spider: SKSpriteNode) {

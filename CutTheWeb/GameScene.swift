@@ -12,6 +12,8 @@ class GameScene: SKScene {
     
     var webs = [Web]()
     var spider = SKSpriteNode()
+    var score = 0
+    var isGameActive = true
     
     override func didMove(to view: SKView) {
         
@@ -36,6 +38,9 @@ class GameScene: SKScene {
                 child.removeFromParent()
             case "tree":
                 createTree(from: child)
+                child.removeFromParent()
+            case "fly":
+                createFly(from: child)
                 child.removeFromParent()
             default:
                 continue
@@ -63,7 +68,8 @@ class GameScene: SKScene {
         spider.name = NodeNames.spider
         spider.physicsBody = SKPhysicsBody(rectangleOf: spider.size)
         spider.physicsBody?.categoryBitMask = PhysicsCategories.spiderCategory
-        spider.physicsBody?.contactTestBitMask = PhysicsCategories.treeCategory
+        spider.physicsBody?.contactTestBitMask = PhysicsCategories.treeCategory | PhysicsCategories.flyCategory
+        spider.physicsBody?.collisionBitMask = PhysicsCategories.treeCategory
         spider.physicsBody?.restitution = 0
         spider.position = node.position
         spider.zPosition = ZPositions.spider
@@ -81,6 +87,11 @@ class GameScene: SKScene {
         tree.position = node.position
         tree.zPosition = ZPositions.tree
         addChild(tree)
+    }
+    
+    func createFly(from node: SKNode) {
+        let fly = Fly(at: node.position)
+        addChild(fly)
     }
     
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -121,13 +132,22 @@ extension GameScene: SKPhysicsContactDelegate {
     func didBegin(_ contact: SKPhysicsContact) {
         let contactMask = contact.bodyA.categoryBitMask | contact.bodyB.categoryBitMask
         if contactMask == PhysicsCategories.spiderCategory | PhysicsCategories.treeCategory {
-            DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
-                if let tree = (contact.bodyA.node?.name != NodeNames.spider) ? contact.bodyA.node as? SKSpriteNode : contact.bodyB.node as? SKSpriteNode {
-                    if self.spider.position.y > tree.position.y {
-                        print("WIN")
-                        self.spider.physicsBody?.isDynamic = false
+            if isGameActive {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
+                    if let tree = (contact.bodyA.node?.name != NodeNames.spider) ? contact.bodyA.node as? SKSpriteNode : contact.bodyB.node as? SKSpriteNode {
+                        if self.spider.position.y > tree.position.y {
+                            print("WIN! score: \(self.score)")
+                            self.spider.physicsBody?.isDynamic = false
+                            self.isGameActive = false
+                        }
                     }
                 }
+            }
+        }
+        if contactMask == PhysicsCategories.spiderCategory | PhysicsCategories.flyCategory {
+            if let fly = (contact.bodyA.node?.name != NodeNames.spider) ? contact.bodyA.node as? SKSpriteNode : contact.bodyB.node as? SKSpriteNode {
+                score += 1
+                fly.removeFromParent()
             }
         }
     }
