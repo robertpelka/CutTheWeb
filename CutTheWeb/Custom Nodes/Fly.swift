@@ -32,7 +32,7 @@ class Fly: SKSpriteNode {
     }
     
     func animate() {
-        let moveWings = SKAction.animate(with: animationFrames, timePerFrame: 0.02)
+        let moveWings = SKAction.animate(with: animationFrames, timePerFrame: 0.03)
         let moveUp = SKAction.moveBy(x: 0, y: 15, duration: 1.0)
         moveUp.timingMode = .easeOut
         let moveDown = SKAction.moveBy(x: 0, y: -15, duration: 1.0)

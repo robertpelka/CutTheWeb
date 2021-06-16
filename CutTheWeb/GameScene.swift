@@ -123,6 +123,19 @@ class GameScene: SKScene {
         }
     }
     
+    override func update(_ currentTime: TimeInterval) {
+        checkSpiderPosition()
+    }
+    
+    func checkSpiderPosition() {
+        if isGameActive {
+            if spider.position.y + spider.size.height/2 < frame.minY {
+                print("LOSS")
+                isGameActive = false
+            }
+        }
+    }
+    
 }
 
 //MARK: - SKPhysicsContactDelegate
