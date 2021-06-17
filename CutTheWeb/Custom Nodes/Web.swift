@@ -11,12 +11,21 @@ class Web: SKSpriteNode {
     
     var segments: [SKSpriteNode] = []
     var webNumber = 0
+    var isSpecial = false
     
-    init(at position: CGPoint, withNumber: Int) {
-        super.init(texture: SKTexture(imageNamed: "strandHolder"), color: UIColor.clear, size: CGSize(width: 30.0, height: 30.0))
+    init(at position: CGPoint, withNumber: Int, isSpecial: Bool) {
+        var holderTexture = SKTexture()
+        if isSpecial {
+            holderTexture = SKTexture(imageNamed: "specialStrandHolder")
+        }
+        else {
+            holderTexture = SKTexture(imageNamed: "strandHolder")
+        }
+        super.init(texture: holderTexture, color: UIColor.clear, size: holderTexture.size())
         self.position = position
         self.zPosition = ZPositions.web
         webNumber = withNumber
+        self.isSpecial = isSpecial
         createPhysicsBody()
     }
     
@@ -28,6 +37,9 @@ class Web: SKSpriteNode {
         if let holderSize = self.texture?.size() {
             self.physicsBody = SKPhysicsBody(circleOfRadius: holderSize.height/2)
             physicsBody?.collisionBitMask = PhysicsCategories.none
+            if isSpecial {
+                physicsBody?.categoryBitMask = PhysicsCategories.specialWeb
+            }
             self.physicsBody?.affectedByGravity = false
             self.physicsBody?.isDynamic = false
         }
@@ -36,11 +48,14 @@ class Web: SKSpriteNode {
     func createSegments(toReach spider: SKSpriteNode) {
         let segmentHeight = 30.0
         let segmentWidth = 6.0
-        let distance = calculateDistance(to: CGPoint(x: spider.frame.midX, y: spider.frame.maxY))
-        let numberOfSegments = Double(distance - self.size.height/2) / segmentHeight
+        var distance = calculateDistance(to: CGPoint(x: spider.frame.midX, y: spider.frame.maxY))
+        if isSpecial {
+            distance = self.size.height/2
+        }
+        let numberOfSegments = Double(distance - 15) / segmentHeight
         let roundedNumberOfSegments = Int(ceil(numberOfSegments))
         let allWholeSegmentsLength = Double(roundedNumberOfSegments - 1) * segmentHeight
-        let lastSegmentHeight = Double(distance - self.size.height/2) - allWholeSegmentsLength
+        let lastSegmentHeight = Double(distance - 15) - allWholeSegmentsLength
         
         for i in 1...roundedNumberOfSegments {
             let segment = SKSpriteNode(color: UIColor.white, size: CGSize(width: segmentWidth, height: segmentHeight))
@@ -68,7 +83,7 @@ class Web: SKSpriteNode {
         return sqrt(pow(point.x - self.position.x, 2) + pow(point.y - self.position.y, 2))
     }
     
-    func connectSegments() {
+    func joinSegments() {
         guard  let holderBody = self.physicsBody, let firstSegmentBody = segments[0].physicsBody else { return }
         let joinPoint = CGPoint(x: self.frame.midX, y: self.frame.midY)
         let joint = SKPhysicsJointPin.joint(withBodyA: holderBody, bodyB: firstSegmentBody, anchor: joinPoint)

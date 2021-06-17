@@ -30,7 +30,11 @@ class GameScene: SKScene {
             guard let name = child.name else { continue }
             switch name {
             case "web":
-                createWeb(from: child, withNumber: webNumber)
+                createWeb(from: child, withNumber: webNumber, special: false)
+                child.removeFromParent()
+                webNumber += 1
+            case "specialWeb":
+                createWeb(from: child, withNumber: webNumber, special: true)
                 child.removeFromParent()
                 webNumber += 1
             case "spider":
@@ -49,16 +53,18 @@ class GameScene: SKScene {
         connectWebs()
     }
     
-    func createWeb(from node: SKNode, withNumber number: Int) {
-        let web = Web(at: node.position, withNumber: number)
-        webs.append(web)
+    func createWeb(from node: SKNode, withNumber number: Int, special: Bool) {
+        let web = Web(at: node.position, withNumber: number, isSpecial: special)
+        if !special {
+            webs.append(web)            
+        }
         addChild(web)
     }
     
     func connectWebs() {
         for web in webs {
             web.createSegments(toReach: spider)
-            web.connectSegments()
+            web.joinSegments()
             web.join(to: spider)
         }
     }
@@ -68,7 +74,7 @@ class GameScene: SKScene {
         spider.name = NodeNames.spider
         spider.physicsBody = SKPhysicsBody(rectangleOf: spider.size)
         spider.physicsBody?.categoryBitMask = PhysicsCategories.spiderCategory
-        spider.physicsBody?.contactTestBitMask = PhysicsCategories.treeCategory | PhysicsCategories.flyCategory
+        spider.physicsBody?.contactTestBitMask = PhysicsCategories.treeCategory | PhysicsCategories.flyCategory | PhysicsCategories.specialWeb
         spider.physicsBody?.collisionBitMask = PhysicsCategories.treeCategory
         spider.physicsBody?.restitution = 0
         spider.position = node.position
@@ -161,6 +167,15 @@ extension GameScene: SKPhysicsContactDelegate {
             if let fly = (contact.bodyA.node?.name != NodeNames.spider) ? contact.bodyA.node as? SKSpriteNode : contact.bodyB.node as? SKSpriteNode {
                 score += 1
                 fly.removeFromParent()
+            }
+        }
+        if contactMask == PhysicsCategories.spiderCategory | PhysicsCategories.specialWeb {
+            if let specialWeb = (contact.bodyA.node?.name != NodeNames.spider) ? contact.bodyA.node as? Web : contact.bodyB.node as? Web {
+                spider.zRotation = 0
+                specialWeb.createSegments(toReach: spider)
+                specialWeb.physicsBody?.categoryBitMask = PhysicsCategories.normalWeb
+                specialWeb.joinSegments()
+                specialWeb.join(to: spider)
             }
         }
     }
