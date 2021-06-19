@@ -12,13 +12,13 @@ class GameScene: SKScene {
     
     var webs = [Web]()
     var spider = SKSpriteNode()
+    var spiderAnchor = SKShapeNode()
     var score = 0
     var isGameActive = true
     
     override func didMove(to view: SKView) {
         
         physicsWorld.contactDelegate = self
-        spider.position = CGPoint(x: frame.midX, y: frame.midY)
         
         setupLevel()
     }
@@ -63,9 +63,9 @@ class GameScene: SKScene {
     
     func connectWebs() {
         for web in webs {
-            web.createSegments(toReach: spider)
+            web.createSegments(toReach: spiderAnchor)
             web.joinSegments()
-            web.join(to: spider)
+            web.join(to: spiderAnchor)
         }
     }
     
@@ -74,12 +74,25 @@ class GameScene: SKScene {
         spider.name = NodeNames.spider
         spider.physicsBody = SKPhysicsBody(rectangleOf: spider.size)
         spider.physicsBody?.categoryBitMask = PhysicsCategories.spiderCategory
-        spider.physicsBody?.contactTestBitMask = PhysicsCategories.treeCategory | PhysicsCategories.flyCategory | PhysicsCategories.specialWeb
+        spider.physicsBody?.contactTestBitMask = PhysicsCategories.treeCategory | PhysicsCategories.flyCategory
         spider.physicsBody?.collisionBitMask = PhysicsCategories.treeCategory
         spider.physicsBody?.restitution = 0
         spider.position = node.position
         spider.zPosition = ZPositions.spider
         addChild(spider)
+        
+        spiderAnchor = SKShapeNode(circleOfRadius: 1)
+        spiderAnchor.name = NodeNames.spider
+        spiderAnchor.physicsBody = SKPhysicsBody(circleOfRadius: 1)
+        spiderAnchor.physicsBody?.mass = 0.2
+        spiderAnchor.physicsBody?.categoryBitMask = PhysicsCategories.spiderCategory
+        spiderAnchor.physicsBody?.contactTestBitMask = PhysicsCategories.specialWebCategory
+        spiderAnchor.physicsBody?.collisionBitMask = PhysicsCategories.treeCategory
+        spiderAnchor.position = CGPoint(x: spider.frame.midX, y: spider.frame.maxY)
+        addChild(spiderAnchor)
+        
+        let joint = SKPhysicsJointFixed.joint(withBodyA: spider.physicsBody!, bodyB: spiderAnchor.physicsBody!, anchor: spiderAnchor.position)
+        physicsWorld.add(joint)
     }
     
     func createTree(from node: SKNode) {
@@ -135,7 +148,7 @@ class GameScene: SKScene {
     
     func checkSpiderPosition() {
         if isGameActive {
-            if spider.position.y + spider.size.height/2 < frame.minY {
+            if spider.frame.maxY < frame.minY {
                 print("LOSS")
                 isGameActive = false
             }
@@ -169,13 +182,13 @@ extension GameScene: SKPhysicsContactDelegate {
                 fly.removeFromParent()
             }
         }
-        if contactMask == PhysicsCategories.spiderCategory | PhysicsCategories.specialWeb {
+        if contactMask == PhysicsCategories.spiderCategory | PhysicsCategories.specialWebCategory {
             if let specialWeb = (contact.bodyA.node?.name != NodeNames.spider) ? contact.bodyA.node as? Web : contact.bodyB.node as? Web {
                 spider.zRotation = 0
-                specialWeb.createSegments(toReach: spider)
-                specialWeb.physicsBody?.categoryBitMask = PhysicsCategories.normalWeb
+                specialWeb.createSegments(toReach: spiderAnchor)
+                specialWeb.physicsBody?.categoryBitMask = PhysicsCategories.normalWebCategory
                 specialWeb.joinSegments()
-                specialWeb.join(to: spider)
+                specialWeb.join(to: spiderAnchor)
             }
         }
     }

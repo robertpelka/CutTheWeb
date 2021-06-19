@@ -21,8 +21,8 @@ enum PhysicsCategories {
     static let spiderCategory: UInt32 = 0x1
     static let treeCategory: UInt32 = 0x1 << 1
     static let flyCategory: UInt32 = 0x1 << 2
-    static let normalWeb: UInt32 = 0x1 << 3
-    static let specialWeb: UInt32 = 0x1 << 4
+    static let normalWebCategory: UInt32 = 0x1 << 3
+    static let specialWebCategory: UInt32 = 0x1 << 4
 }
 
 enum NodeNames {

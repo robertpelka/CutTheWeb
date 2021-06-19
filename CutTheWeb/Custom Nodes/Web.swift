@@ -36,19 +36,18 @@ class Web: SKSpriteNode {
     func createPhysicsBody() {
         if let holderSize = self.texture?.size() {
             self.physicsBody = SKPhysicsBody(circleOfRadius: holderSize.height/2)
-            physicsBody?.collisionBitMask = PhysicsCategories.none
             if isSpecial {
-                physicsBody?.categoryBitMask = PhysicsCategories.specialWeb
+                physicsBody?.categoryBitMask = PhysicsCategories.specialWebCategory
             }
             self.physicsBody?.affectedByGravity = false
             self.physicsBody?.isDynamic = false
         }
     }
     
-    func createSegments(toReach spider: SKSpriteNode) {
+    func createSegments(toReach spiderAnchor: SKShapeNode) {
         let segmentHeight = 30.0
         let segmentWidth = 6.0
-        var distance = calculateDistance(to: CGPoint(x: spider.frame.midX, y: spider.frame.maxY))
+        var distance = calculateDistance(to: spiderAnchor.position)
         if isSpecial {
             distance = self.size.height/2
         }
@@ -75,7 +74,7 @@ class Web: SKSpriteNode {
             segment.name = NodeNames.webSegment + String(webNumber)
             segment.position = CGPoint(x: position.x, y: position.y - offset)
             segments.append(segment)
-            spider.scene?.addChild(segment)
+            spiderAnchor.scene?.addChild(segment)
         }
     }
     
@@ -98,14 +97,13 @@ class Web: SKSpriteNode {
         }
     }
     
-    func join(to spider: SKSpriteNode) {
+    func join(to spiderAnchor: SKShapeNode) {
         if let lastSegment = segments.last {
-            lastSegment.position = CGPoint(x: spider.position.x, y: spider.position.y + spider.frame.size.height/2)
+            lastSegment.position = CGPoint(x: spiderAnchor.frame.midX, y: spiderAnchor.frame.midY + lastSegment.size.height/2)
         }
         
-        guard  let spiderBody = spider.physicsBody, let lastSegmentBody = segments.last?.physicsBody else { return }
-        let joinPoint = CGPoint(x: spider.frame.midX, y: spider.frame.maxY)
-        let joint = SKPhysicsJointPin.joint(withBodyA: lastSegmentBody, bodyB: spiderBody, anchor: joinPoint)
+        guard  let spiderBody = spiderAnchor.physicsBody, let lastSegmentBody = segments.last?.physicsBody else { return }
+        let joint = SKPhysicsJointPin.joint(withBodyA: lastSegmentBody, bodyB: spiderBody, anchor: spiderAnchor.position)
         self.scene?.physicsWorld.add(joint)
     }
     
