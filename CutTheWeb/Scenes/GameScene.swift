@@ -17,9 +17,7 @@ class GameScene: SKScene {
     var isGameActive = true
     
     override func didMove(to view: SKView) {
-        
         physicsWorld.contactDelegate = self
-        
         setupLevel()
     }
     

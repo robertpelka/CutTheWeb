@@ -15,6 +15,9 @@
 		486812492673505D00F13870 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 486812482673505D00F13870 /* Assets.xcassets */; };
 		48B5DCD72679EC230077AD26 /* Fly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48B5DCD62679EC230077AD26 /* Fly.swift */; };
 		48B5DCDB2679EFDA0077AD26 /* AnimationHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48B5DCDA2679EFDA0077AD26 /* AnimationHelper.swift */; };
+		48B5DCE0267DEED90077AD26 /* Button.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48B5DCDF267DEED90077AD26 /* Button.swift */; };
+		48B5DCE3267DF45C0077AD26 /* MenuScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48B5DCE2267DF45C0077AD26 /* MenuScene.swift */; };
+		48B5DCE8267E30870077AD26 /* SKNode+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48B5DCE7267E30870077AD26 /* SKNode+Extensions.swift */; };
 		48DF20D12673EAA300D6344F /* Configuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48DF20D02673EAA300D6344F /* Configuration.swift */; };
 		48DF20D42673ECB200D6344F /* Web.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48DF20D32673ECB200D6344F /* Web.swift */; };
 /* End PBXBuildFile section */
@@ -30,6 +33,9 @@
 		4868124A2673505D00F13870 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		48B5DCD62679EC230077AD26 /* Fly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fly.swift; sourceTree = "<group>"; };
 		48B5DCDA2679EFDA0077AD26 /* AnimationHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimationHelper.swift; sourceTree = "<group>"; };
+		48B5DCDF267DEED90077AD26 /* Button.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Button.swift; sourceTree = "<group>"; };
+		48B5DCE2267DF45C0077AD26 /* MenuScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuScene.swift; sourceTree = "<group>"; };
+		48B5DCE7267E30870077AD26 /* SKNode+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SKNode+Extensions.swift"; sourceTree = "<group>"; };
 		48DF20D02673EAA300D6344F /* Configuration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Configuration.swift; sourceTree = "<group>"; };
 		48DF20D32673ECB200D6344F /* Web.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Web.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -66,7 +72,7 @@
 			children = (
 				4868123B2673505800F13870 /* AppDelegate.swift */,
 				4868123D2673505800F13870 /* GameScene.sks */,
-				486812412673505800F13870 /* GameScene.swift */,
+				48B5DCE5267DF4720077AD26 /* Scenes */,
 				486812432673505800F13870 /* GameViewController.swift */,
 				486812452673505800F13870 /* Main.storyboard */,
 				486812482673505D00F13870 /* Assets.xcassets */,
@@ -74,6 +80,7 @@
 				48DF20D02673EAA300D6344F /* Configuration.swift */,
 				48B5DCDD2679EFF70077AD26 /* Custom Nodes */,
 				48B5DCDA2679EFDA0077AD26 /* AnimationHelper.swift */,
+				48B5DCE7267E30870077AD26 /* SKNode+Extensions.swift */,
 			);
 			path = CutTheWeb;
 			sourceTree = "<group>";
@@ -83,8 +90,18 @@
 			children = (
 				48DF20D32673ECB200D6344F /* Web.swift */,
 				48B5DCD62679EC230077AD26 /* Fly.swift */,
+				48B5DCDF267DEED90077AD26 /* Button.swift */,
 			);
 			path = "Custom Nodes";
+			sourceTree = "<group>";
+		};
+		48B5DCE5267DF4720077AD26 /* Scenes */ = {
+			isa = PBXGroup;
+			children = (
+				486812412673505800F13870 /* GameScene.swift */,
+				48B5DCE2267DF45C0077AD26 /* MenuScene.swift */,
+			);
+			path = Scenes;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -160,8 +177,11 @@
 				486812422673505800F13870 /* GameScene.swift in Sources */,
 				48B5DCDB2679EFDA0077AD26 /* AnimationHelper.swift in Sources */,
 				486812442673505800F13870 /* GameViewController.swift in Sources */,
+				48B5DCE3267DF45C0077AD26 /* MenuScene.swift in Sources */,
+				48B5DCE0267DEED90077AD26 /* Button.swift in Sources */,
 				48DF20D12673EAA300D6344F /* Configuration.swift in Sources */,
 				48B5DCD72679EC230077AD26 /* Fly.swift in Sources */,
+				48B5DCE8267E30870077AD26 /* SKNode+Extensions.swift in Sources */,
 				48DF20D42673ECB200D6344F /* Web.swift in Sources */,
 				4868123C2673505800F13870 /* AppDelegate.swift in Sources */,
 			);
