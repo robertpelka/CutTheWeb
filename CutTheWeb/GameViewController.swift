@@ -9,13 +9,17 @@ import UIKit
 import SpriteKit
 import GameplayKit
 
+protocol SceneManagerDelegate {
+    func presentMenuScene()
+    func presentLevelMenuScene()
+    func presentLevelScene(number: Int)
+}
+
 class GameViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        let menuScene = MenuScene()
-        present(scene: menuScene, width: .resizeFill)
+        presentMenuScene()
     }
     
     func present(scene: SKScene, width scaleMode: SKSceneScaleMode) {
@@ -37,4 +41,27 @@ class GameViewController: UIViewController {
     override var prefersStatusBarHidden: Bool {
         return true
     }
+}
+
+extension GameViewController: SceneManagerDelegate {
+    
+    func presentMenuScene() {
+        let menuScene = MenuScene()
+        menuScene.sceneManagerDelegate = self
+        present(scene: menuScene, width: .resizeFill)
+    }
+    
+    func presentLevelMenuScene() {
+        let levelMenuScene = LevelMenuScene()
+        levelMenuScene.sceneManagerDelegate = self
+        present(scene: levelMenuScene, width: .resizeFill)
+    }
+    
+    func presentLevelScene(number: Int) {
+        let sceneName = "Level\(number)"
+        if let gameScene = SKScene(fileNamed: sceneName) as? GameScene {
+            present(scene: gameScene, width: .aspectFill)
+        }
+    }
+    
 }

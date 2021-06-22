@@ -9,6 +9,8 @@ import SpriteKit
 
 class MenuScene: SKScene {
     
+    var sceneManagerDelegate: SceneManagerDelegate?
+    
     override func didMove(to view: SKView) {
         setupMenu()
     }
@@ -31,21 +33,20 @@ class MenuScene: SKScene {
         let logo = SKSpriteNode(imageNamed: "logo")
         logo.scaleToWidth(of: frame.size, multiplier: 0.65)
         logo.position = CGPoint(x: frame.midX, y: (frame.maxY + frame.midY) / 2)
-        print((frame.maxY + frame.midY) / 2)
         logo.zPosition = ZPositions.hud
         addChild(logo)
     }
     
     func createPlayButton() {
-        let playButton = Button(texture: SKTexture(imageNamed: "playButton"), action: goToLevelMenuScene)
+        let playButton = Button(texture: SKTexture(imageNamed: "playButton"), action: goToLevelMenuScene, number: nil)
         playButton.scaleToWidth(of: frame.size, multiplier: 0.3)
         playButton.position = CGPoint(x: frame.midX, y: frame.midY)
         playButton.zPosition = ZPositions.button
         addChild(playButton)
     }
     
-    func goToLevelMenuScene() {
-        print("go To Level Menu Scene!")
+    func goToLevelMenuScene(_: Int?) {
+        sceneManagerDelegate?.presentLevelMenuScene()
     }
     
 }
