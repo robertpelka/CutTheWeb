@@ -23,6 +23,7 @@
 		48B5DCF42681E7F40077AD26 /* RammettoOne-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 48B5DCF32681E7F40077AD26 /* RammettoOne-Regular.ttf */; };
 		48DF20D12673EAA300D6344F /* Configuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48DF20D02673EAA300D6344F /* Configuration.swift */; };
 		48DF20D42673ECB200D6344F /* Web.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48DF20D32673ECB200D6344F /* Web.swift */; };
+		48E1B91026862EFF00F16E1B /* Popup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48E1B90F26862EFF00F16E1B /* Popup.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -44,6 +45,7 @@
 		48B5DCF32681E7F40077AD26 /* RammettoOne-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "RammettoOne-Regular.ttf"; sourceTree = "<group>"; };
 		48DF20D02673EAA300D6344F /* Configuration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Configuration.swift; sourceTree = "<group>"; };
 		48DF20D32673ECB200D6344F /* Web.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Web.swift; sourceTree = "<group>"; };
+		48E1B90F26862EFF00F16E1B /* Popup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Popup.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -98,6 +100,7 @@
 				48DF20D32673ECB200D6344F /* Web.swift */,
 				48B5DCD62679EC230077AD26 /* Fly.swift */,
 				48B5DCDF267DEED90077AD26 /* Button.swift */,
+				48E1B90F26862EFF00F16E1B /* Popup.swift */,
 			);
 			path = "Custom Nodes";
 			sourceTree = "<group>";
@@ -207,6 +210,7 @@
 				48B5DCE3267DF45C0077AD26 /* MenuScene.swift in Sources */,
 				48B5DCE0267DEED90077AD26 /* Button.swift in Sources */,
 				48DF20D12673EAA300D6344F /* Configuration.swift in Sources */,
+				48E1B91026862EFF00F16E1B /* Popup.swift in Sources */,
 				48B5DCD72679EC230077AD26 /* Fly.swift in Sources */,
 				48B5DCE8267E30870077AD26 /* SKNode+Extensions.swift in Sources */,
 				48DF20D42673ECB200D6344F /* Web.swift in Sources */,

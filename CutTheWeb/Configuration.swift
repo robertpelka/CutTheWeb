@@ -15,8 +15,9 @@ enum ZPositions {
     static let fly: CGFloat = 3
     static let spider: CGFloat = 4
     static let hud: CGFloat = 5
-    static let button: CGFloat = 6
-    static let buttonText: CGFloat = 7
+    static let hudElement: CGFloat = 6
+    static let button: CGFloat = 7
+    static let buttonText: CGFloat = 8
 }
 
 enum PhysicsCategories {

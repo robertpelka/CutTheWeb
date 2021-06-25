@@ -147,10 +147,16 @@ class GameScene: SKScene {
     func checkSpiderPosition() {
         if isGameActive {
             if spider.frame.maxY < frame.minY {
-                print("LOSS")
+                presentPopup(isLevelCompleted: false)
                 isGameActive = false
             }
         }
+    }
+    
+    func presentPopup(isLevelCompleted completion: Bool) {
+        let popup = Popup(isLevelCompleted: completion, numberOfFliesCatched: score, forFrame: frame.size)
+        popup.zPosition = ZPositions.hud
+        addChild(popup)
     }
     
 }
@@ -166,7 +172,7 @@ extension GameScene: SKPhysicsContactDelegate {
                 DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
                     if let tree = (contact.bodyA.node?.name != NodeNames.spider) ? contact.bodyA.node as? SKSpriteNode : contact.bodyB.node as? SKSpriteNode {
                         if self.spider.position.y > tree.position.y {
-                            print("WIN! score: \(self.score)")
+                            self.presentPopup(isLevelCompleted: true)
                             self.spider.physicsBody?.isDynamic = false
                             self.isGameActive = false
                         }
