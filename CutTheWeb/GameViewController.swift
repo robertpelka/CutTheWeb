@@ -60,6 +60,8 @@ extension GameViewController: SceneManagerDelegate {
     func presentLevelScene(number: Int) {
         let sceneName = "Level\(number)"
         if let gameScene = SKScene(fileNamed: sceneName) as? GameScene {
+            gameScene.sceneManagerDelegate = self
+            gameScene.levelNumber = number
             present(scene: gameScene, width: .aspectFill)
         }
     }

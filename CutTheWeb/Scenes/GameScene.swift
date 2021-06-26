@@ -15,6 +15,9 @@ class GameScene: SKScene {
     var spiderAnchor = SKShapeNode()
     var score = 0
     var isGameActive = true
+    var levelNumber = 0
+    
+    var sceneManagerDelegate: SceneManagerDelegate?
     
     override func didMove(to view: SKView) {
         physicsWorld.contactDelegate = self
@@ -147,15 +150,16 @@ class GameScene: SKScene {
     func checkSpiderPosition() {
         if isGameActive {
             if spider.frame.maxY < frame.minY {
-                presentPopup(isLevelCompleted: false)
                 isGameActive = false
+                presentPopup(isLevelCompleted: false)
             }
         }
     }
     
     func presentPopup(isLevelCompleted completion: Bool) {
-        let popup = Popup(isLevelCompleted: completion, numberOfFliesCatched: score, forFrame: frame.size)
+        let popup = Popup(forFrame: frame.size, levelNumber: levelNumber, isLevelCompleted: completion, numberOfFliesCatched: score)
         popup.zPosition = ZPositions.hud
+        popup.sceneManagerDelegate = sceneManagerDelegate
         addChild(popup)
     }
     
@@ -168,13 +172,13 @@ extension GameScene: SKPhysicsContactDelegate {
     func didBegin(_ contact: SKPhysicsContact) {
         let contactMask = contact.bodyA.categoryBitMask | contact.bodyB.categoryBitMask
         if contactMask == PhysicsCategories.spiderCategory | PhysicsCategories.treeCategory {
-            if isGameActive {
-                DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.75) {
+                if self.isGameActive {
                     if let tree = (contact.bodyA.node?.name != NodeNames.spider) ? contact.bodyA.node as? SKSpriteNode : contact.bodyB.node as? SKSpriteNode {
-                        if self.spider.position.y > tree.position.y {
-                            self.presentPopup(isLevelCompleted: true)
+                        if self.spider.position.y > tree.frame.maxY - self.spider.size.height {
                             self.spider.physicsBody?.isDynamic = false
                             self.isGameActive = false
+                            self.presentPopup(isLevelCompleted: true)
                         }
                     }
                 }
