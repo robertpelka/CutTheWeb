@@ -24,6 +24,16 @@
 		48DF20D12673EAA300D6344F /* Configuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48DF20D02673EAA300D6344F /* Configuration.swift */; };
 		48DF20D42673ECB200D6344F /* Web.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48DF20D32673ECB200D6344F /* Web.swift */; };
 		48E1B91026862EFF00F16E1B /* Popup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48E1B90F26862EFF00F16E1B /* Popup.swift */; };
+		48E1B91326871D0500F16E1B /* Level3.sks in Resources */ = {isa = PBXBuildFile; fileRef = 48E1B91226871D0500F16E1B /* Level3.sks */; };
+		48E1B91626871D6300F16E1B /* Level4.sks in Resources */ = {isa = PBXBuildFile; fileRef = 48E1B91526871D6300F16E1B /* Level4.sks */; };
+		48E1B91926871E9E00F16E1B /* Level5.sks in Resources */ = {isa = PBXBuildFile; fileRef = 48E1B91826871E9E00F16E1B /* Level5.sks */; };
+		48E1B91C26871F2200F16E1B /* Level6.sks in Resources */ = {isa = PBXBuildFile; fileRef = 48E1B91B26871F2200F16E1B /* Level6.sks */; };
+		48E1B91F2687210C00F16E1B /* Level7.sks in Resources */ = {isa = PBXBuildFile; fileRef = 48E1B91E2687210C00F16E1B /* Level7.sks */; };
+		48E1B9222687215600F16E1B /* Level8.sks in Resources */ = {isa = PBXBuildFile; fileRef = 48E1B9212687215600F16E1B /* Level8.sks */; };
+		48E1B925268721AE00F16E1B /* Level9.sks in Resources */ = {isa = PBXBuildFile; fileRef = 48E1B924268721AE00F16E1B /* Level9.sks */; };
+		48E1B9282687220100F16E1B /* Level10.sks in Resources */ = {isa = PBXBuildFile; fileRef = 48E1B9272687220100F16E1B /* Level10.sks */; };
+		48E1B92B2687227600F16E1B /* Level11.sks in Resources */ = {isa = PBXBuildFile; fileRef = 48E1B92A2687227600F16E1B /* Level11.sks */; };
+		48E1B92E268722E000F16E1B /* Level12.sks in Resources */ = {isa = PBXBuildFile; fileRef = 48E1B92D268722E000F16E1B /* Level12.sks */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -46,6 +56,16 @@
 		48DF20D02673EAA300D6344F /* Configuration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Configuration.swift; sourceTree = "<group>"; };
 		48DF20D32673ECB200D6344F /* Web.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Web.swift; sourceTree = "<group>"; };
 		48E1B90F26862EFF00F16E1B /* Popup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Popup.swift; sourceTree = "<group>"; };
+		48E1B91226871D0500F16E1B /* Level3.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Level3.sks; sourceTree = "<group>"; };
+		48E1B91526871D6300F16E1B /* Level4.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Level4.sks; sourceTree = "<group>"; };
+		48E1B91826871E9E00F16E1B /* Level5.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Level5.sks; sourceTree = "<group>"; };
+		48E1B91B26871F2200F16E1B /* Level6.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Level6.sks; sourceTree = "<group>"; };
+		48E1B91E2687210C00F16E1B /* Level7.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Level7.sks; sourceTree = "<group>"; };
+		48E1B9212687215600F16E1B /* Level8.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Level8.sks; sourceTree = "<group>"; };
+		48E1B924268721AE00F16E1B /* Level9.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Level9.sks; sourceTree = "<group>"; };
+		48E1B9272687220100F16E1B /* Level10.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Level10.sks; sourceTree = "<group>"; };
+		48E1B92A2687227600F16E1B /* Level11.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Level11.sks; sourceTree = "<group>"; };
+		48E1B92D268722E000F16E1B /* Level12.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Level12.sks; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -120,6 +140,16 @@
 			children = (
 				4868123D2673505800F13870 /* Level1.sks */,
 				48B5DCEB2681D3900077AD26 /* Level2.sks */,
+				48E1B91226871D0500F16E1B /* Level3.sks */,
+				48E1B91526871D6300F16E1B /* Level4.sks */,
+				48E1B91826871E9E00F16E1B /* Level5.sks */,
+				48E1B91B26871F2200F16E1B /* Level6.sks */,
+				48E1B91E2687210C00F16E1B /* Level7.sks */,
+				48E1B9212687215600F16E1B /* Level8.sks */,
+				48E1B924268721AE00F16E1B /* Level9.sks */,
+				48E1B9272687220100F16E1B /* Level10.sks */,
+				48E1B92A2687227600F16E1B /* Level11.sks */,
+				48E1B92D268722E000F16E1B /* Level12.sks */,
 			);
 			path = Levels;
 			sourceTree = "<group>";
@@ -189,10 +219,20 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				48E1B91C26871F2200F16E1B /* Level6.sks in Resources */,
+				48E1B91326871D0500F16E1B /* Level3.sks in Resources */,
+				48E1B9282687220100F16E1B /* Level10.sks in Resources */,
 				486812472673505800F13870 /* Main.storyboard in Resources */,
 				4868123E2673505800F13870 /* Level1.sks in Resources */,
+				48E1B91F2687210C00F16E1B /* Level7.sks in Resources */,
+				48E1B91626871D6300F16E1B /* Level4.sks in Resources */,
+				48E1B925268721AE00F16E1B /* Level9.sks in Resources */,
+				48E1B92B2687227600F16E1B /* Level11.sks in Resources */,
 				486812492673505D00F13870 /* Assets.xcassets in Resources */,
+				48E1B9222687215600F16E1B /* Level8.sks in Resources */,
 				48B5DCF42681E7F40077AD26 /* RammettoOne-Regular.ttf in Resources */,
+				48E1B92E268722E000F16E1B /* Level12.sks in Resources */,
+				48E1B91926871E9E00F16E1B /* Level5.sks in Resources */,
 				48B5DCEC2681D3900077AD26 /* Level2.sks in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

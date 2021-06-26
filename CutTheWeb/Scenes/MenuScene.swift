@@ -19,6 +19,7 @@ class MenuScene: SKScene {
         createBackground()
         createLogo()
         createPlayButton()
+        createSpider()
     }
     
     func createBackground() {
@@ -47,6 +48,15 @@ class MenuScene: SKScene {
     
     func goToLevelMenuScene(_: Int?) {
         sceneManagerDelegate?.presentLevelMenuScene()
+    }
+    
+    func createSpider() {
+        let spider = SKSpriteNode(imageNamed: "spider")
+        spider.scaleToWidth(of: frame.size, multiplier: 0.4)
+        spider.position = CGPoint(x: frame.midX, y: frame.midY / 2)
+        spider.zPosition = ZPositions.hud
+        spider.zRotation = CGFloat.pi / 20
+        addChild(spider)
     }
     
 }
