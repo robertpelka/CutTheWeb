@@ -16,6 +16,9 @@ class Popup: SKNode {
     
     var sceneManagerDelegate: SceneManagerDelegate?
     
+    let playWonSound = SKAction.playSoundFileNamed("won", waitForCompletion: false)
+    let playLostSound = SKAction.playSoundFileNamed("lost", waitForCompletion: false)
+    
     init(forFrame frameSize: CGSize, levelNumber: Int, isLevelCompleted: Bool, numberOfFliesCatched: Int) {
         super.init()
         self.isLevelCompleted = isLevelCompleted
@@ -36,6 +39,7 @@ class Popup: SKNode {
         createPopupText()
         createFliesScore()
         createButtons()
+        playSound()
     }
     
     func createBackground() {
@@ -59,11 +63,12 @@ class Popup: SKNode {
     }
     
     func createFliesScore() {
+        var numberOfFlies = numberOfFliesCatched
         for i in -1...1 {
             var fly = SKSpriteNode(imageNamed: "flyGray")
-            if numberOfFliesCatched > 0 && isLevelCompleted {
+            if numberOfFlies > 0 && isLevelCompleted {
                 fly = SKSpriteNode(imageNamed: "flyGold")
-                numberOfFliesCatched -= 1
+                numberOfFlies -= 1
             }
             fly.scaleToWidth(of: frameSize, multiplier: 0.11)
             let offset = CGFloat(i) * fly.size.width * 1.5
@@ -95,6 +100,15 @@ class Popup: SKNode {
             sceneManagerDelegate?.presentLevelScene(number: levelNumber+1)
         default:
             return
+        }
+    }
+    
+    func playSound() {
+        if isLevelCompleted && numberOfFliesCatched > 0 {
+            run(playWonSound)
+        }
+        else {
+            run(playLostSound)
         }
     }
     

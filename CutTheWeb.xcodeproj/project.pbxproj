@@ -34,6 +34,13 @@
 		48E1B9282687220100F16E1B /* Level10.sks in Resources */ = {isa = PBXBuildFile; fileRef = 48E1B9272687220100F16E1B /* Level10.sks */; };
 		48E1B92B2687227600F16E1B /* Level11.sks in Resources */ = {isa = PBXBuildFile; fileRef = 48E1B92A2687227600F16E1B /* Level11.sks */; };
 		48E1B92E268722E000F16E1B /* Level12.sks in Resources */ = {isa = PBXBuildFile; fileRef = 48E1B92D268722E000F16E1B /* Level12.sks */; };
+		48E1B9352688658900F16E1B /* bounce.wav in Resources */ = {isa = PBXBuildFile; fileRef = 48E1B9322688658800F16E1B /* bounce.wav */; };
+		48E1B9362688658900F16E1B /* eat.wav in Resources */ = {isa = PBXBuildFile; fileRef = 48E1B9332688658900F16E1B /* eat.wav */; };
+		48E1B93B268866D500F16E1B /* music.wav in Resources */ = {isa = PBXBuildFile; fileRef = 48E1B93A268866D500F16E1B /* music.wav */; };
+		48E1B93F26886ABE00F16E1B /* lost.wav in Resources */ = {isa = PBXBuildFile; fileRef = 48E1B93D26886ABE00F16E1B /* lost.wav */; };
+		48E1B94026886ABE00F16E1B /* won.wav in Resources */ = {isa = PBXBuildFile; fileRef = 48E1B93E26886ABE00F16E1B /* won.wav */; };
+		48E1B94326886F2A00F16E1B /* connect.wav in Resources */ = {isa = PBXBuildFile; fileRef = 48E1B94226886F2A00F16E1B /* connect.wav */; };
+		48E1B94A2688707300F16E1B /* cut.wav in Resources */ = {isa = PBXBuildFile; fileRef = 48E1B9492688707200F16E1B /* cut.wav */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -66,6 +73,13 @@
 		48E1B9272687220100F16E1B /* Level10.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Level10.sks; sourceTree = "<group>"; };
 		48E1B92A2687227600F16E1B /* Level11.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Level11.sks; sourceTree = "<group>"; };
 		48E1B92D268722E000F16E1B /* Level12.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Level12.sks; sourceTree = "<group>"; };
+		48E1B9322688658800F16E1B /* bounce.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = bounce.wav; sourceTree = "<group>"; };
+		48E1B9332688658900F16E1B /* eat.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = eat.wav; sourceTree = "<group>"; };
+		48E1B93A268866D500F16E1B /* music.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = music.wav; sourceTree = "<group>"; };
+		48E1B93D26886ABE00F16E1B /* lost.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = lost.wav; sourceTree = "<group>"; };
+		48E1B93E26886ABE00F16E1B /* won.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = won.wav; sourceTree = "<group>"; };
+		48E1B94226886F2A00F16E1B /* connect.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = connect.wav; sourceTree = "<group>"; };
+		48E1B9492688707200F16E1B /* cut.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = cut.wav; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -109,6 +123,7 @@
 				48DF20D02673EAA300D6344F /* Configuration.swift */,
 				48B5DCDA2679EFDA0077AD26 /* AnimationHelper.swift */,
 				48B5DCE7267E30870077AD26 /* SKNode+Extensions.swift */,
+				48E1B9312688657400F16E1B /* Sounds */,
 				48B5DCF62681E7FB0077AD26 /* Fonts */,
 			);
 			path = CutTheWeb;
@@ -160,6 +175,20 @@
 				48B5DCF32681E7F40077AD26 /* RammettoOne-Regular.ttf */,
 			);
 			path = Fonts;
+			sourceTree = "<group>";
+		};
+		48E1B9312688657400F16E1B /* Sounds */ = {
+			isa = PBXGroup;
+			children = (
+				48E1B9492688707200F16E1B /* cut.wav */,
+				48E1B94226886F2A00F16E1B /* connect.wav */,
+				48E1B93D26886ABE00F16E1B /* lost.wav */,
+				48E1B93E26886ABE00F16E1B /* won.wav */,
+				48E1B93A268866D500F16E1B /* music.wav */,
+				48E1B9322688658800F16E1B /* bounce.wav */,
+				48E1B9332688658900F16E1B /* eat.wav */,
+			);
+			path = Sounds;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -221,18 +250,25 @@
 			files = (
 				48E1B91C26871F2200F16E1B /* Level6.sks in Resources */,
 				48E1B91326871D0500F16E1B /* Level3.sks in Resources */,
+				48E1B93B268866D500F16E1B /* music.wav in Resources */,
+				48E1B9362688658900F16E1B /* eat.wav in Resources */,
+				48E1B9352688658900F16E1B /* bounce.wav in Resources */,
 				48E1B9282687220100F16E1B /* Level10.sks in Resources */,
 				486812472673505800F13870 /* Main.storyboard in Resources */,
 				4868123E2673505800F13870 /* Level1.sks in Resources */,
 				48E1B91F2687210C00F16E1B /* Level7.sks in Resources */,
 				48E1B91626871D6300F16E1B /* Level4.sks in Resources */,
+				48E1B93F26886ABE00F16E1B /* lost.wav in Resources */,
+				48E1B94026886ABE00F16E1B /* won.wav in Resources */,
 				48E1B925268721AE00F16E1B /* Level9.sks in Resources */,
+				48E1B94A2688707300F16E1B /* cut.wav in Resources */,
 				48E1B92B2687227600F16E1B /* Level11.sks in Resources */,
 				486812492673505D00F13870 /* Assets.xcassets in Resources */,
 				48E1B9222687215600F16E1B /* Level8.sks in Resources */,
 				48B5DCF42681E7F40077AD26 /* RammettoOne-Regular.ttf in Resources */,
 				48E1B92E268722E000F16E1B /* Level12.sks in Resources */,
 				48E1B91926871E9E00F16E1B /* Level5.sks in Resources */,
+				48E1B94326886F2A00F16E1B /* connect.wav in Resources */,
 				48B5DCEC2681D3900077AD26 /* Level2.sks in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

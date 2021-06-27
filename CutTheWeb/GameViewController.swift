@@ -8,6 +8,7 @@
 import UIKit
 import SpriteKit
 import GameplayKit
+import AVFoundation
 
 protocol SceneManagerDelegate {
     func presentMenuScene()
@@ -17,6 +18,8 @@ protocol SceneManagerDelegate {
 
 class GameViewController: UIViewController {
 
+    var musicPlayer: AVAudioPlayer?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         presentMenuScene()
@@ -28,8 +31,8 @@ class GameViewController: UIViewController {
             view.presentScene(scene)
             view.ignoresSiblingOrder = true
             
-            view.showsFPS = true
-            view.showsNodeCount = true
+            view.showsFPS = false
+            view.showsNodeCount = false
             view.showsPhysics = false
         }
     }
@@ -43,18 +46,22 @@ class GameViewController: UIViewController {
     }
 }
 
+//MARK: - SceneManagerDelegate
+
 extension GameViewController: SceneManagerDelegate {
     
     func presentMenuScene() {
         let menuScene = MenuScene()
         menuScene.sceneManagerDelegate = self
         present(scene: menuScene, width: .resizeFill)
+        playMusic()
     }
     
     func presentLevelMenuScene() {
         let levelMenuScene = LevelMenuScene()
         levelMenuScene.sceneManagerDelegate = self
         present(scene: levelMenuScene, width: .resizeFill)
+        playMusic()
     }
     
     func presentLevelScene(number: Int) {
@@ -63,7 +70,32 @@ extension GameViewController: SceneManagerDelegate {
             gameScene.sceneManagerDelegate = self
             gameScene.levelNumber = number
             present(scene: gameScene, width: .aspectFill)
+            stopMusic()
         }
+    }
+    
+}
+
+//MARK: - AVFoundation
+
+extension GameViewController {
+    
+    func playMusic() {
+        if musicPlayer?.isPlaying != true {
+            let musicPath = Bundle.main.path(forResource: "music.wav", ofType:nil)!
+            let musicUrl = URL(fileURLWithPath: musicPath)
+            do {
+                musicPlayer = try AVAudioPlayer(contentsOf: musicUrl)
+                musicPlayer?.numberOfLoops = -1
+                musicPlayer?.play()
+            } catch {
+                fatalError("Couldn't load a file with music, \(error)")
+            }
+        }
+    }
+    
+    func stopMusic() {
+        musicPlayer?.stop()
     }
     
 }

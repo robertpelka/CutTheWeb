@@ -19,6 +19,11 @@ class GameScene: SKScene {
     
     var sceneManagerDelegate: SceneManagerDelegate?
     
+    let playEatSound = SKAction.playSoundFileNamed("eat", waitForCompletion: false)
+    let playBounceSound = SKAction.playSoundFileNamed("bounce", waitForCompletion: false)
+    let playConnectSound = SKAction.playSoundFileNamed("connect", waitForCompletion: false)
+    let playCutSound = SKAction.playSoundFileNamed("cut", waitForCompletion: false)
+    
     override func didMove(to view: SKView) {
         physicsWorld.contactDelegate = self
         setupLevel()
@@ -135,6 +140,7 @@ class GameScene: SKScene {
     
     func cutWeb(at segment: SKNode) {
         segment.removeFromParent()
+        run(playCutSound)
         enumerateChildNodes(withName: segment.name!) { (node, _) in
             let fadeOut = SKAction.fadeOut(withDuration: 0.8)
             let remove = SKAction.removeFromParent()
@@ -172,6 +178,7 @@ extension GameScene: SKPhysicsContactDelegate {
     func didBegin(_ contact: SKPhysicsContact) {
         let contactMask = contact.bodyA.categoryBitMask | contact.bodyB.categoryBitMask
         if contactMask == PhysicsCategories.spiderCategory | PhysicsCategories.treeCategory {
+            run(playBounceSound)
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.75) {
                 if self.isGameActive {
                     if let tree = (contact.bodyA.node?.name != NodeNames.spider) ? contact.bodyA.node as? SKSpriteNode : contact.bodyB.node as? SKSpriteNode {
@@ -187,6 +194,7 @@ extension GameScene: SKPhysicsContactDelegate {
         if contactMask == PhysicsCategories.spiderCategory | PhysicsCategories.flyCategory {
             if let fly = (contact.bodyA.node?.name != NodeNames.spider) ? contact.bodyA.node as? SKSpriteNode : contact.bodyB.node as? SKSpriteNode {
                 score += 1
+                run(playEatSound)
                 fly.removeFromParent()
             }
         }
@@ -197,6 +205,7 @@ extension GameScene: SKPhysicsContactDelegate {
                 specialWeb.physicsBody?.categoryBitMask = PhysicsCategories.normalWebCategory
                 specialWeb.joinSegments()
                 specialWeb.join(to: spiderAnchor)
+                run(playConnectSound)
             }
         }
     }
